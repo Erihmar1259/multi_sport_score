@@ -7,6 +7,7 @@ import 'package:multi_sport_score/ui/custom_widgets/custom_text.dart';
 import 'package:multi_sport_score/ui/custom_widgets/custom_text_button.dart';
 import 'package:multi_sport_score/ui/custom_widgets/custom_text_field.dart';
 import 'package:multi_sport_score/ui/screens/scores/scores_screen.dart';
+import 'package:multi_sport_score/ui/screens/settings/settings_screen.dart';
 import '../../../constants/color_const.dart';
 
 class BottomNavigationMenu extends StatelessWidget {
@@ -96,11 +97,7 @@ class BottomNavigationMenu extends StatelessWidget {
                 text: "Menu 3",
                 onPressed: () {},
               )),
-              Center(
-                  child: CustomCard(
-                widget: const CustomText(text: "Menu 4"),
-                color: secondaryColor,
-              )),
+             const SettingsScreen()
             ],
           )),
     ));
