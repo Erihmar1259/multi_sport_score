@@ -6,6 +6,7 @@ import 'package:multi_sport_score/constants/dimen_const.dart';
 import 'package:multi_sport_score/constants/images_const.dart';
 import 'package:multi_sport_score/ui/custom_widgets/custom_follow_widget.dart';
 import 'package:multi_sport_score/ui/custom_widgets/custom_text.dart';
+import 'package:multi_sport_score/ui/screens/intro/select_teams_screen.dart';
 
 import '../bottom_navigation/bottom_navigation_menu.dart';
 
@@ -18,13 +19,15 @@ class IntroScreen extends StatelessWidget {
       length: 4, // Number of tabs
       child: Scaffold(
           backgroundColor: primaryColor,
+
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 100.h,
             backgroundColor: primaryColor,
             title: CustomText(
               text: "Select one or more Leagues to follow",
               fontWeight: FontWeight.bold,
-              fontSize: 18.sp,
+              fontSize: 20.sp,
               color: whiteColor,
               maxLines: 2,
             ),
@@ -125,9 +128,9 @@ class IntroScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
+                GestureDetector(
                   onTap: () {
-                    Get.to(() => BottomNavigationMenu());
+                    Get.to(() =>const SelectTeamsScreen());
                   },
                   child: CustomText(
                     text: "Next",
