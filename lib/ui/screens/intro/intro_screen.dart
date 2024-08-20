@@ -31,7 +31,7 @@ class IntroScreen extends StatelessWidget {
             indicatorColor: secondaryColor,
             labelColor: secondaryColor,
             unselectedLabelColor: lightWhiteColor,
-            tabs: [
+            tabs: const [
               Tab(text: 'Popular'),
               Tab(text: 'Football'),
               Tab(text: 'Basketball'),

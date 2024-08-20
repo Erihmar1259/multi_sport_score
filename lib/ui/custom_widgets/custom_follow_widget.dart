@@ -32,8 +32,8 @@ final String? subLabel;
           ),
           Image.asset(
             image,
-            width: 50.w,
-            height: 50.h,
+            width: 60.w,
+            height: 60.h,
           ),
           CustomText(
             text: label,
