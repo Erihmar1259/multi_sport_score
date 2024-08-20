@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:multi_sport_score/controller/scores_controller.dart';
+import 'package:multi_sport_score/ui/custom_widgets/custom_card.dart';
 import 'package:multi_sport_score/ui/custom_widgets/custom_text.dart';
 
 import '../../../constants/color_const.dart';
@@ -14,26 +15,81 @@ class ScoresScreen extends StatelessWidget {
     final scoresController = Get.put(ScoresController());
     return Scaffold(
         backgroundColor: primaryColor,
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+        ),
         body: Obx(
           () => scoresController.isLoading.value == true
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : Column(
-                  children: [
-                    ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: scoresController.stList.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 50.w,
-                            width: 50.w,
-                            child: CustomText(
-                              text: scoresController.stList[index].name ?? '',
-                            ),
-                          );
-                        })
-                  ],
+              : Padding(
+                  padding: EdgeInsets.all(10.w),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 45.h,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: scoresController.stList.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Obx(
+                                () => InkWell(
+                                  onTap: () {
+                                    scoresController.selectSport(
+                                        scoresController.stList[index]);
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 5.w,
+                                        bottom: 5.w,
+                                        left: 10.w,
+                                        right: 10.w),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.sports_soccer,
+                                          color: scoresController
+                                                      .selectedSport.value.id ==
+                                                  scoresController
+                                                      .stList[index].id
+                                              ? secondaryColor
+                                              : Colors.white,
+                                        ),
+                                        CustomText(
+                                          text: scoresController
+                                                  .stList[index].name ??
+                                              '',
+                                          color: scoresController
+                                                      .selectedSport.value.id ==
+                                                  scoresController
+                                                      .stList[index].id
+                                              ? secondaryColor
+                                              : Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                      CustomCard(
+                          width: double.infinity,
+                          widget: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                text: 'League name',
+                              ),
+                              CustomText(text: 'See Standings')
+                            ],
+                          ))
+                    ],
+                  ),
                 ),
         ));
   }

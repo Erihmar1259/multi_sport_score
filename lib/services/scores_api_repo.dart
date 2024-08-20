@@ -1,3 +1,4 @@
+import 'package:multi_sport_score/models/scores.dart';
 import 'package:multi_sport_score/models/sport_type.dart';
 import 'package:multi_sport_score/services/api_constant.dart';
 import 'package:multi_sport_score/services/api_utils.dart';
@@ -20,29 +21,18 @@ class ScoresApiRepo {
     }
   }
 
-  // Future<UserModel> getGuestUser() async {
-  //   try {
-  //     final response =
-  //         await apiUtils.get(url: "${ApiConstant.baseUrl}getGuest");
-  //     final cookies = response.headers['set-cookie'];
-  //     if ((cookies ?? []).isNotEmpty) {
-  //       final box = GetStorage();
-  //       box.write('cookies', cookies?[0].toString());
-  //       apiUtils.setCookies(cookies?[0] ?? '');
-  //     }
-  //     print("cookies>>>${cookies?[0].toString()}");
-  //     // Global.cookie =
-  //     //     response.headers.map["set-cookie"]?.first.split(";").first ?? '';
-  //     // if ((Global.cookie).isNotEmpty) {
-  //     //   final box = GetStorage();
-  //     //   box.write('cookies', Global.cookie);
-  //     //   apiUtils.setCookiesJar(Global.cookie);
-  //     // }
-  //     // print("cookies>>>${Global.cookie}");
-  //     final guest = response.data;
-  //     return UserModel.fromJson(guest);
-  //   } catch (e) {
-  //     throw CustomException(e.toString());
-  //   }
-  // }
+  Future<Scores> getScores(String startDate, int sportId) async {
+    try {
+      final response = await apiUtils
+          .get(url: "${ApiConstant.baseUrl}Data/Games/", queryParameters: {
+        "startdate": startDate,
+        "sports": sportId,
+        "lang": 1,
+      });
+      final res = response.data;
+      return Scores.fromJson(res);
+    } catch (e) {
+      throw CustomException(e.toString());
+    }
+  }
 }

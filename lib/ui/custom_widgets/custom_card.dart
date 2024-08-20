@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard(
-      {super.key,
-      this.height,
-      this.width,
-      this.color,
-      required this.widget,
-      this.cardElevation,
-      });
+  const CustomCard({
+    super.key,
+    this.height,
+    this.width,
+    this.color,
+    required this.widget,
+    this.cardElevation,
+  });
   final double? height;
   final double? width;
   final Color? color;
@@ -19,18 +19,13 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      // shape: RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
-      // ),
-      elevation: cardElevation ?? 5.h,
-      child: Container(
-        padding: EdgeInsets.all(10.w),
-        height: height,
-        width: width,
-        color: color ?? cardColor,
-        child: widget,
-      ),
+    return Container(
+      height: height,
+      width: width,
+      padding: EdgeInsets.all(10.w),
+      decoration: BoxDecoration(
+          color: color ?? cardColor, borderRadius: BorderRadius.circular(5.r)),
+      child: widget,
     );
   }
 }
